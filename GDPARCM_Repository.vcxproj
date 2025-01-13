@@ -132,10 +132,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseRunner.cpp" />
+    <ClCompile Include="BGObject.cpp" />
+    <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextureDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
+    <ClInclude Include="BGObject.h" />
+    <ClInclude Include="FPSCounter.h" />
+    <ClInclude Include="TextureDisplay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

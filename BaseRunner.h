@@ -11,8 +11,8 @@ class BaseRunner : private sf::NonCopyable
 {
 public:
 	static const sf::Time TIME_PER_FRAME;
-	static const int WINDOW_HEIGHT = 1920; 
-	static const int WINDOW_WIDTH  = 1080;
+	static const int WINDOW_HEIGHT = 1080; 
+	static const int WINDOW_WIDTH  = 1920;
 
 	BaseRunner();
 	void run();
@@ -24,6 +24,7 @@ public:
 
 private:
 	sf::RenderWindow window;
+	sf::Clock frameClock; 
 	float fps = 0.0f;
 
 	void render();

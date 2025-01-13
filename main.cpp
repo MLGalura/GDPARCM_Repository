@@ -2,6 +2,6 @@
 #include "BaseRunner.h"
 
 int main() {
-	BaseRunner runner;
-	runner.run();
+	BaseRunner* runner = BaseRunner::getInstance();
+	runner->run();
 }

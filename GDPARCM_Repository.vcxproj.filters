@@ -7,6 +7,9 @@
     <Filter Include="Threading">
       <UniqueIdentifier>{d66d4567-2f3a-42e8-bc92-16d96e213d50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{ec44772b-305a-4bea-a9b7-b974551e046f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -15,10 +18,28 @@
     <ClCompile Include="BaseRunner.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="BGObject.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureDisplay.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BGObject.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounter.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureDisplay.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
