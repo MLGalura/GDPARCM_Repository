@@ -1,27 +1,13 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include <vector>
-
-#include <iostream>
-
-using namespace std;
-
-class BGObject
+#include "AGameObject.h"
+class BGObject : public AGameObject
 {
-public:
-	BGObject();
-	~BGObject();
-
-	void initialize();
-	void processInput();
-	void update(sf::Time deltaTime);
-	void draw(sf::RenderWindow* targetWindow);
-
-private:
-	static const int SPEED_MULTIPLIER = 50;
-
-	sf::Sprite sprite;
-	sf::Texture texture;
+	public: 
+		BGObject(String name);
+		void initialize() override;
+		void processInput(sf::Event event) override;
+		void update(sf::Time deltaTime) override;
+	private:
+		const float SPEED_MULTIPLIER = 100.0f;
 };
 

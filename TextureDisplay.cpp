@@ -1,72 +1,69 @@
 #include "TextureDisplay.h"
+#include <iostream>
+#include "TextureManager.h"
 #include "BaseRunner.h"
-
-TextureDisplay::TextureDisplay()
+#include "GameObjectManager.h"
+#include "IconObject.h"
+TextureDisplay::TextureDisplay(): AGameObject("TextureDisplay")
 {
-}
-
-TextureDisplay::~TextureDisplay()
-{
+	
 }
 
 void TextureDisplay::initialize()
 {
-    this->elapsedTime = sf::Time::Zero;
-	this->position = sf::Vector2f(0.f, 0.f);
-
-    // Stores the paths per iteration
-    for (const auto& entry : filesystem::directory_iterator("Media/Streaming")) {
-        if (entry.is_regular_file()) 
-            filePaths.push_back(entry.path().string());
-    }
-
-    // Avoids reallocation
-    textures.reserve(filePaths.size()); 
-
-    cout << "Found " << filePaths.size() << " images in the folder." << endl;
+	
 }
 
-void TextureDisplay::processInput()
+void TextureDisplay::processInput(sf::Event event)
 {
+	
 }
 
 void TextureDisplay::update(sf::Time deltaTime)
 {
-    this->elapsedTime += deltaTime;
-
-    if (this->elapsedTime.asSeconds() >= this->TIME_TO_DISPLAY && this->currentSpriteIndex < this->filePaths.size()) {
-        sf::Texture texture; 
-
-        if (texture.loadFromFile(this->filePaths[currentSpriteIndex])) {
-            this->textures.push_back(texture);  
-            sf::Sprite sprite(this->textures.back());
-
-            
-            sprite.setScale(this->IMAGE_SIZE / static_cast<float>(this->textures.back().getSize().x),
-                            this->IMAGE_SIZE / static_cast<float>(this->textures.back().getSize().y));
-
-            sprite.setPosition(this->position);
-            this->sprites.push_back(std::move(sprite));
-
-            this->position.x += this->IMAGE_SIZE + this->SPACING;
-            if (this->position.x + this->IMAGE_SIZE > BaseRunner::WINDOW_WIDTH) {
-                this->position.x = 0.f;
-                this->position.y += this->IMAGE_SIZE + this->SPACING;
-            }
-
-            this->currentSpriteIndex++;
-        }
-
-        else 
-            cout << "Failed to load image: " << this->filePaths[this->currentSpriteIndex] << endl;
-
-        this->elapsedTime = sf::Time::Zero;
-    }
+	this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
+	if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
+	{
+		this->startedStreaming = true;
+		this->ticks = 0.0f;
+		TextureManager::getInstance()->loadStreamingAssets();
+	}
+	else if (this->streamingType == StreamingType::SINGLE_STREAM && this->ticks > this->STREAMING_LOAD_DELAY)
+	{
+		this->ticks = 0.0f;
+		TextureManager::getInstance()->loadSingleStreamAsset(this->numDisplayed, this);
+		this->numDisplayed++;
+	}
 }
 
-void TextureDisplay::draw(sf::RenderWindow* targetWindow)
+void TextureDisplay::onFinishedExecution()
 {
-    for (const auto& sprite : sprites) {
-        targetWindow->draw(sprite);
-    }
+	this->spawnObject(); //executes spawn once the texture is ready.
+}
+
+void TextureDisplay::spawnObject()
+{
+	this->guard.lock();
+	
+	String objectName = "Icon_" + to_string(this->iconList.size());
+	IconObject* iconObj = new IconObject(objectName, this->iconList.size());
+	this->iconList.push_back(iconObj);
+
+	//set position
+	int IMG_WIDTH = 68; int IMG_HEIGHT = 68;
+	float x = this->columnGrid * IMG_WIDTH;
+	float y = this->rowGrid * IMG_HEIGHT;
+	iconObj->setPosition(x, y);
+
+	std::cout << "Set position: " << x << " " << y << std::endl;
+
+	this->columnGrid++;
+	if(this->columnGrid == this->MAX_COLUMN)
+	{
+		this->columnGrid = 0;
+		this->rowGrid++;
+	}
+	GameObjectManager::getInstance()->addObject(iconObj);
+
+	this->guard.unlock();
 }

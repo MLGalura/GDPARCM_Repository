@@ -1,28 +1,20 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include <vector>
-
-#include <iostream>
-#include "BaseRunner.h"
-
-using namespace std;
-
-class FPSCounter
+#include "AGameObject.h"
+class FPSCounter :    public AGameObject
 {
-public:
-	FPSCounter();
-	~FPSCounter();
+	public:
+		FPSCounter();
+		~FPSCounter();
+		void initialize() override;
+		void processInput(sf::Event event) override;
+		void update(sf::Time deltaTime) override;
+		void draw(sf::RenderWindow* targetWindow) override;
+	
+	private:
+		sf::Time updateTime;
+		sf::Text* statsText;
 
-	void initialize();
-	void processInput();
-	void update(sf::Time deltaTime);
-	void draw(sf::RenderWindow* targetWindow);
-
-private:
-	sf::Time updateTime;
-	sf::Text* statsText;
-
-	void updateFPS(sf::Time elapsedTime);
+		void updateFPS(sf::Time elapsedTime);
+		
 };
 
