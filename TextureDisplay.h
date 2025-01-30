@@ -21,9 +21,9 @@ public:
 	void draw(sf::RenderWindow* targetWindow);
 
 private:
-	const float TIME_TO_DISPLAY = 0.5f;
-	const int IMAGE_SIZE = 75;
-	const int SPACING = 25;
+	const float TIME_TO_DISPLAY = 0.15f;
+	const int IMAGE_SIZE = 50;
+	const int SPACING = 15;
 
 	vector<sf::Texture> textures;
 	vector<sf::Sprite> sprites;
