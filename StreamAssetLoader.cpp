@@ -17,6 +17,22 @@ StreamAssetLoader::~StreamAssetLoader()
 	std::cout << "Destroying stream asset loader. " << std::endl;
 }
 
+void StreamAssetLoader::onStartTask()
+{
+	IETThread::sleep(1500);
+
+	std::vector<String> tokens = StringUtils::split(path, '/');
+	String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
+	TextureManager::getInstance()->instantiateAsTexture(path, assetName, true);
+
+	std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
+
+	this->execEvent->onFinishedExecution();
+	//delete after being done
+	delete this;
+}
+
+/*
 void StreamAssetLoader::run()
 {
 	std::cout << "Running stream asset loader " << std::endl;
@@ -37,3 +53,4 @@ void StreamAssetLoader::run()
 	//delete after being done
 	delete this;
 }
+*/

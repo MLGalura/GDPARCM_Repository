@@ -36,6 +36,12 @@
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="AGameObject.cpp" />
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolWorkerThread.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
@@ -59,5 +65,14 @@
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="AGameObject.h" />
+    <ClInclude Include="IWorkerAction.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolWorkerThread.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
