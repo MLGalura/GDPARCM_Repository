@@ -53,12 +53,12 @@ void ThreadPool::run()
 				std::cout << "worker thread #" << workerThread->getThreadID() << " was assigned a task." << std::endl;
 			}
 
-			else
-				std::cout << "No More Available Worker Threads" << std::endl;
+			/*else
+				std::cout << "No More Available Worker Threads" << std::endl;*/
 		}
 
-		else 
-			std::cout << "No Actions Scheduled" << std::endl;
+		/*else 
+			std::cout << "No Actions Scheduled" << std::endl;*/
 	}
 }
 

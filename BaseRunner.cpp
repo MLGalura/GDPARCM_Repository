@@ -6,6 +6,7 @@
 #include "BGObject.h"
 #include "TextureManager.h"
 #include "TextureDisplay.h"
+#include "SoundManager.h"
 #include "FPSCounter.h"
 
 /// <summary>
@@ -24,6 +25,8 @@ BaseRunner::BaseRunner() :
 	
 	//load initial textures
 	TextureManager::getInstance()->loadFromAssetList();
+	SoundManager::getInstance()->loadMusic("HanuTheme.mp3");
+	SoundManager::getInstance()->playMusic(true);
 
 	//load objects
 	BGObject* bgObject = new BGObject("BGObject");

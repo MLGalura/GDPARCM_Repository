@@ -19,7 +19,7 @@ StreamAssetLoader::~StreamAssetLoader()
 
 void StreamAssetLoader::onStartTask()
 {
-	IETThread::sleep(1500);
+	//IETThread::sleep(100);
 
 	std::vector<String> tokens = StringUtils::split(path, '/');
 	String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];

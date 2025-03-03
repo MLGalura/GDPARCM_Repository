@@ -68,7 +68,6 @@ void TextureManager::loadSingleStreamAsset(int index, IExecutionEvent* execution
 
 			String path = entry.path().generic_string();
 			StreamAssetLoader* assetLoader = new StreamAssetLoader(path, executionEvent);
-			//assetLoader->start(); // Change to schedule task
 			this->threadPool->scheduleTask(assetLoader);
 			
 			break;

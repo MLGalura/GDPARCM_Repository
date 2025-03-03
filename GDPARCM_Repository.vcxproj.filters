@@ -27,21 +27,40 @@
     <ClCompile Include="TextureDisplay.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp" />
-    <ClCompile Include="HelloWorldThread.cpp" />
-    <ClCompile Include="IconObject.cpp" />
-    <ClCompile Include="IETThread.cpp" />
-    <ClCompile Include="IExecutionEvent.cpp" />
-    <ClCompile Include="StreamAssetLoader.cpp" />
-    <ClCompile Include="StringUtils.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="ThreadPool.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
     <ClCompile Include="PoolWorkerThread.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloWorldThread.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="IETThread.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="IExecutionEvent.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="IconObject.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamAssetLoader.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
@@ -56,15 +75,6 @@
     <ClInclude Include="TextureDisplay.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="HelloWorldThread.h" />
-    <ClInclude Include="IconObject.h" />
-    <ClInclude Include="IETThread.h" />
-    <ClInclude Include="IExecutionEvent.h" />
-    <ClInclude Include="StreamAssetLoader.h" />
-    <ClInclude Include="StringUtils.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="AGameObject.h" />
     <ClInclude Include="IWorkerAction.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -74,5 +84,33 @@
     <ClInclude Include="PoolWorkerThread.h">
       <Filter>Threading</Filter>
     </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="HelloWorldThread.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="IETThread.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="IExecutionEvent.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="IconObject.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamAssetLoader.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
 </Project>
