@@ -26,6 +26,7 @@ BaseRunner::BaseRunner() :
 	//load initial textures
 	TextureManager::getInstance()->loadFromAssetList();
 	SoundManager::getInstance()->loadMusic("HanuTheme.mp3");
+	SoundManager::getInstance()->setMusicVolume(30);
 	SoundManager::getInstance()->playMusic(true);
 
 	//load objects
