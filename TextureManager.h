@@ -17,7 +17,9 @@ public:
 	void loadFromAssetList(); //loading of all assets needed for startup
 	void loadStreamingAssets(); //loading of assets during runtime
 	void loadSingleStreamAsset(int index, IExecutionEvent* executionEvent); //loads a single streaming asset based on index in directory
+	void loadSpecialAssets(IExecutionEvent* executionEvent);
 	sf::Texture* getFromTextureMap(const String assetName, int frameIndex);
+	TextureList getTextureList();
 	int getNumFrames(const String assetName);
 
 	sf::Texture* getStreamTextureFromList(const int index);
@@ -36,6 +38,7 @@ private:
 	TextureList streamTextureList;
 
 	const std::string STREAMING_PATH = "Media/Streaming/";
+	const std::string SPECIAL_PATH = "Media/40MB/";
 	int streamingAssetCount = 0;
 
 	void countStreamingAssets();

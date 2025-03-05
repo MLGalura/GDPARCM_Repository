@@ -3,23 +3,44 @@
 #include "BaseRunner.h"
 #include "TextureManager.h"
 
-IconObject::IconObject(String name, int textureIndex): AGameObject(name)
-{
-	this->textureIndex = textureIndex;
+IconObject::IconObject(String name, int textureIndex) : AGameObject(name) {
+    this->textureIndex = textureIndex;
+    this->elapsedTime = 0.0f;
+    this->currentFrame = 0;
 }
 
-void IconObject::initialize()
-{
-	//assign texture
-	this->sprite = new sf::Sprite();
-	sf::Texture* texture = TextureManager::getInstance()->getStreamTextureFromList(this->textureIndex);
-	this->sprite->setTexture(*texture);
+void IconObject::initialize() {
+    // Initialize the sprite with texture
+    sf::Texture* texture = TextureManager::getInstance()->getStreamTextureFromList(this->textureIndex);
+    if (texture) {
+        this->sprite = new sf::Sprite();
+        this->sprite->setTexture(*texture);
+
+        // Set frame size
+        this->frameWidth = texture->getSize().x / 10; 
+        this->frameHeight = texture->getSize().y / 5; 
+        this->frameRect = sf::IntRect(0, 0, this->frameWidth, this->frameHeight);
+        this->sprite->setTextureRect(this->frameRect);
+    }
 }
 
-void IconObject::processInput(sf::Event event)
-{
+void IconObject::processInput(sf::Event event) {
 }
 
-void IconObject::update(sf::Time deltaTime)
-{
+void IconObject::update(sf::Time deltaTime) {
+    // Handle animation
+    float animationSpeed = 0.1f;
+    this->elapsedTime += deltaTime.asSeconds();
+
+    if (this->elapsedTime >= animationSpeed) {
+        this->elapsedTime = 0.0f;
+        this->currentFrame = (this->currentFrame + 1) % (10 * 5);
+
+        int column = this->currentFrame % 10;
+        int row = this->currentFrame / 10;
+        this->frameRect.left = column * this->frameWidth;
+        this->frameRect.top = row * this->frameHeight;
+        this->sprite->setTextureRect(this->frameRect);
+    }
 }
+

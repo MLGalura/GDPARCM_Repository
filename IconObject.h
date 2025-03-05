@@ -10,5 +10,10 @@ public:
 
 private:
 	int textureIndex = 0;
+	sf::IntRect frameRect;
+	float elapsedTime = 0.0f;
+	int currentFrame = 0;
+	int frameWidth = 0;
+	int frameHeight = 0;
 };
 

@@ -7,6 +7,8 @@
 #include "StreamAssetLoader.h"
 #include "IExecutionEvent.h"
 
+typedef std::vector<sf::Texture*> TextureList;
+
 //a singleton class
 TextureManager* TextureManager::sharedInstance = NULL;
 
@@ -22,7 +24,7 @@ TextureManager* TextureManager::getInstance() {
 TextureManager::TextureManager()
 {
 	this->countStreamingAssets();
-	this->threadPool = new ThreadPool("TextureManagerPool", 50);
+	this->threadPool = new ThreadPool("TextureManagerPool", 8);
 	this->threadPool->startScheduler();
 }
 
@@ -60,11 +62,11 @@ void TextureManager::loadSingleStreamAsset(int index, IExecutionEvent* execution
 {
 	int fileNum = 0;
 	
-	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
+	for (const auto& entry : std::filesystem::directory_iterator(SPECIAL_PATH)) {
 		if(index == fileNum)
 		{
 			//simulate loading of very large file
-			//IETThread::sleep(200);
+			//IETThread::sleep(1000);
 
 			String path = entry.path().generic_string();
 			StreamAssetLoader* assetLoader = new StreamAssetLoader(path, executionEvent);
@@ -77,6 +79,15 @@ void TextureManager::loadSingleStreamAsset(int index, IExecutionEvent* execution
 	}
 }
 
+void TextureManager::loadSpecialAssets(IExecutionEvent* executionEvent)
+{
+	for (const auto& entry : std::filesystem::directory_iterator(SPECIAL_PATH)) {
+		String path = entry.path().generic_string();
+		StreamAssetLoader* assetLoader = new StreamAssetLoader(path, executionEvent);
+		this->threadPool->scheduleTask(assetLoader);
+	}
+}
+
 sf::Texture* TextureManager::getFromTextureMap(const String assetName, int frameIndex)
 {
 	if (!this->textureMap[assetName].empty()) {
@@ -86,6 +97,11 @@ sf::Texture* TextureManager::getFromTextureMap(const String assetName, int frame
 		std::cout << "[TextureManager] No texture found for " << assetName << std::endl;
 		return NULL;
 	}
+}
+
+TextureList TextureManager::getTextureList()
+{
+	return this->baseTextureList;
 }
 
 int TextureManager::getNumFrames(const String assetName)
