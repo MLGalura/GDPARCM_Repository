@@ -1,1 +1,12 @@
 Media/Textures/Penacony.jpg
+Media/Textures/Scoreboard.png
+Media/Streaming/Aventurine.png
+Media/Streaming/Blade.png
+Media/Streaming/Jingliu.png
+Media/Streaming/JingYuan.png
+Media/Streaming/Kafka.png
+Media/Streaming/March7th.png
+Media/Streaming/Rappa.png
+Media/Streaming/RuanMei.png
+Media/Streaming/Sparkle.png
+Media/Streaming/Topaz.png

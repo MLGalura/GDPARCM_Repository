@@ -13,6 +13,8 @@ public:
     void update(sf::Time deltaTime) override;
     void draw(sf::RenderWindow* targetWindow) override;
 
+    bool IsComplete();
+
 private:
     sf::Text* loadingText;
     sf::Font* font;

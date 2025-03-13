@@ -139,6 +139,7 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClCompile Include="BGObject.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GameplayManager.cpp" />
     <ClCompile Include="HelloWorldThread.cpp" />
     <ClCompile Include="IconObject.cpp" />
     <ClCompile Include="IETThread.cpp" />
@@ -149,9 +150,11 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StreamAssetLoader.cpp" />
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="Target.cpp" />
     <ClCompile Include="TextureDisplay.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="Scoreboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AGameObject.h" />
@@ -159,6 +162,7 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="BGObject.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameplayManager.h" />
     <ClInclude Include="HelloWorldThread.h" />
     <ClInclude Include="IconObject.h" />
     <ClInclude Include="IETThread.h" />
@@ -169,9 +173,11 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StreamAssetLoader.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="Target.h" />
     <ClInclude Include="TextureDisplay.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="Scoreboard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

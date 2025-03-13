@@ -49,10 +49,15 @@ void LoadPercentage::update(sf::Time deltaTime) {
         this->loadingText->setFillColor(textColor);
         this->loadingText->setOutlineColor(outlineColor);
     }
-}
+} 
 
 void LoadPercentage::draw(sf::RenderWindow* targetWindow) {
     targetWindow->draw(*this->loadingText);
+}
+
+bool LoadPercentage::IsComplete()
+{
+    return this->isComplete;
 }
 
 void LoadPercentage::updatePercentage() {

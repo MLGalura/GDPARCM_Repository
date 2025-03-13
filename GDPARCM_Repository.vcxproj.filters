@@ -10,6 +10,9 @@
     <Filter Include="Components">
       <UniqueIdentifier>{ec44772b-305a-4bea-a9b7-b974551e046f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gameplay">
+      <UniqueIdentifier>{e5387a45-f30a-4fbf-810d-793cc62199d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="LoadPercentage.cpp" />
+    <ClCompile Include="GameplayManager.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
@@ -114,5 +126,14 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="LoadPercentage.h" />
+    <ClInclude Include="GameplayManager.h">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
