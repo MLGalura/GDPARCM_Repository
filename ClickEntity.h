@@ -1,6 +1,8 @@
 #pragma once
 #include "AGameObject.h"
 
+enum Movement { HORIZONTAL, VERTCIAL, DIAGONAL };
+
 class ClickEntity : public AGameObject
 {
 public:

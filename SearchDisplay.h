@@ -17,6 +17,7 @@ public:
 
     void arrangeGrid(int columns, float padding);
     void scatterRandom(int areaPadding);
+    void shuffleEntities();
     void reset();
     void resetExceptTarget();
 

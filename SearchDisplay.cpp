@@ -29,7 +29,7 @@ void SearchDisplay::arrangeGrid(int columns, float padding) {
 
     int rows = this->entityCount / columns + 1;
     float startX = (BaseRunner::WINDOW_WIDTH - (columns * (objectWidth + padding))) / 2;
-    float startY = 100.0f; 
+    float startY = 150.0f; 
 
     std::random_device seeder;
     std::mt19937 engine(seeder());
@@ -37,28 +37,40 @@ void SearchDisplay::arrangeGrid(int columns, float padding) {
 
     for (int i = 0; i < this->entityCount; i++) {
         int randomIndex = dist(engine);
+        std::string randName;
 
         if (this->targetSpawned == true) {
             while (this->currentTarget == targetNames[randomIndex]) {
                 randomIndex = dist(engine);
             }
+            randName = targetNames[randomIndex];
         }
 
-        ClickEntity* entity = new ClickEntity("SearchEntity_" + std::to_string(i), targetNames[randomIndex]);
+        else
+            randName = this->currentTarget;
 
-        if (GameplayManager::getInstance()->getTarget() == targetNames[randomIndex])
+
+        ClickEntity* entity = new ClickEntity("SearchEntity_" + std::to_string(i), randName);
+
+        if (GameplayManager::getInstance()->getTarget() == randName)
             this->targetSpawned = true;
 
-        // Calculate grid position
+        entity->initialize();
+        clickEntities.push_back(entity);
+        GameObjectManager::getInstance()->addObject(entity);
+    }
+
+    // to randomize more
+    this->shuffleEntities();
+
+    // Calculate grid position
+    for (int i = 0; i < clickEntities.size(); i++) {
         int col = i % columns;
         int row = i / columns;
         float x = startX + col * (objectWidth + padding);
         float y = startY + row * (objectHeight + padding);
 
-        entity->initialize();
-        entity->setPosition(x, y);
-        clickEntities.push_back(entity);
-        GameObjectManager::getInstance()->addObject(entity);
+        clickEntities[i]->setPosition(x, y);
     }
 }
 
@@ -73,16 +85,21 @@ void SearchDisplay::scatterRandom(int areaPadding) {
 
     for (int i = 0; i < this->entityCount; i++) {
         int randomIndex = dist(engine);
+        std::string randName;
 
         if (this->targetSpawned == true) {
             while (this->currentTarget == targetNames[randomIndex]) {
                 randomIndex = dist(engine);
             }
+            randName = targetNames[randomIndex];
         }
 
-        ClickEntity* entity = new ClickEntity("SearchEntity_" + std::to_string(i), targetNames[randomIndex]);
+        else
+            randName = this->currentTarget;
 
-        if (GameplayManager::getInstance()->getTarget() == targetNames[randomIndex])
+        ClickEntity* entity = new ClickEntity("SearchEntity_" + std::to_string(i), randName);
+
+        if (GameplayManager::getInstance()->getTarget() == randName)
             this->targetSpawned = true;
 
         entity->initialize();
@@ -93,6 +110,13 @@ void SearchDisplay::scatterRandom(int areaPadding) {
         clickEntities.push_back(entity);
         GameObjectManager::getInstance()->addObject(entity);
     }
+}
+
+void SearchDisplay::shuffleEntities()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::shuffle(clickEntities.begin(), clickEntities.end(), gen);
 }
 
 void SearchDisplay::reset() {

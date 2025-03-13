@@ -78,17 +78,18 @@ void GameplayManager::startRound()
     std::uniform_int_distribution<> modeDist(0, 1);
     currentMode = static_cast<GameMode>(modeDist(gen));
 
-    // Randomize entity count (15-30)
-    std::uniform_int_distribution<> countDist(15, 75);
-    int entityCount = countDist(gen);
+    this->currentMode = GRID;
+    if (this->currentMode == GRID) {
+        std::uniform_int_distribution<> countDist(15, 45);
+        int entityCount = countDist(gen);
 
-    this->sd->setEntityCount(entityCount);
+        this->sd->setEntityCount(entityCount);
 
-    if(this->currentMode == GRID) 
         this->setupGridMode();
+    }
 
-    else 
-        this->setupScatterMode();
+    //else 
+     //   this->setupScatterMode();
 
 }
 
@@ -105,11 +106,11 @@ void GameplayManager::setupGridMode()
     std::mt19937 gen(rd());
 
     // Random columns x, y respectively
-    std::uniform_int_distribution<> colDist(5, 10);
+    std::uniform_int_distribution<> colDist(5, 12);
     int columns = colDist(gen);
 
     // Random padding x, y respectively
-    std::uniform_real_distribution<float> padDist(20.0f, 50.0f);
+    std::uniform_real_distribution<float> padDist(20.0f, 40.0f);
     float padding = padDist(gen);
 
     this->sd->arrangeGrid(columns, padding);
