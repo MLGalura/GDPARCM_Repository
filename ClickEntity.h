@@ -10,6 +10,7 @@ public:
 	void update(sf::Time deltaTime);
 
 	void setTarget(std::string name);
+	sf::Sprite* getSprite();
 
 private:
 	std::string targetName;

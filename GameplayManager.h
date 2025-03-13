@@ -13,11 +13,16 @@ public:
     void update(sf::Time elapsedTime);
 
     void setScore(int value);
+    int getScore();
     void setTarget(std::string name);
+    std::string getTarget();
 
 private:
     int curScore;
     std::string curTarget;
+
+    Scoreboard* scoreboard;
+    Target* target;
 
     GameplayManager();
     GameplayManager(GameplayManager const&) {};             // copy constructor is private

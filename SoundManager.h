@@ -7,6 +7,9 @@
 
 class SoundManager {
 public:
+    typedef std::string String;
+
+public:
     static SoundManager* getInstance();
 
     bool loadSound(const std::string& name, const std::string& filename);
@@ -19,6 +22,8 @@ public:
 
     void setSoundVolume(float volume);
     void setMusicVolume(float volume);
+
+    void loadfromAudioList();
 
 private:
     SoundManager();

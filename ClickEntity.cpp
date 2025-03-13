@@ -2,6 +2,8 @@
 #include <iostream>
 #include "BaseRunner.h"
 #include "TextureManager.h"
+#include "GameplayManager.h"
+#include "SoundManager.h"
 
 ClickEntity::ClickEntity(String name, String initial) : AGameObject(name)
 {
@@ -32,8 +34,17 @@ void ClickEntity::processInput(sf::Event event)
 {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
     {
-        if (this->sprite && this->sprite->getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
-            this->setTarget("Rappa");
+        if (this->sprite && this->sprite->getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+            if (GameplayManager::getInstance()->getTarget() == this->targetName) {
+                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() + 10);
+                SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Success");
+            }
+
+            else {
+                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() - 5);
+                SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Fail");
+            }
+        }
     }
 }
 
@@ -47,4 +58,9 @@ void ClickEntity::setTarget(std::string name)
     this->sprite->setTexture(*texture);
 
     this->targetName = name;
+}
+
+sf::Sprite* ClickEntity::getSprite()
+{
+    return this->sprite;
 }

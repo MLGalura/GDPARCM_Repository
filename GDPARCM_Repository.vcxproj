@@ -148,6 +148,7 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClCompile Include="LoadPercentage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
+    <ClCompile Include="SearchDisplay.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StreamAssetLoader.cpp" />
     <ClCompile Include="StringUtils.cpp" />
@@ -172,6 +173,7 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="IWorkerAction.h" />
     <ClInclude Include="LoadPercentage.h" />
     <ClInclude Include="PoolWorkerThread.h" />
+    <ClInclude Include="SearchDisplay.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StreamAssetLoader.h" />
     <ClInclude Include="StringUtils.h" />

@@ -1,5 +1,8 @@
 #include "SoundManager.h"
+#include <fstream>
 #include <iostream>
+#include <filesystem>
+#include "StringUtils.h"
 
 SoundManager* SoundManager::sharedInstance = NULL;
 
@@ -69,4 +72,24 @@ void SoundManager::setSoundVolume(float volume) {
 void SoundManager::setMusicVolume(float volume) {
     musicVolume = volume;
     backgroundMusic.setVolume(volume);
+}
+
+void SoundManager::loadfromAudioList()
+{
+    for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
+        if (entry.is_regular_file())
+        {
+            std::string filename = entry.path().filename().string();
+            std::string name = StringUtils::split(filename, '.')[0];
+
+            if (entry.path().extension() == ".wav" || entry.path().extension() == ".ogg" || entry.path().extension() == ".mp3")
+            {
+                if (loadSound(name, filename))
+                    std::cout << "Loaded sound: " << name << std::endl;
+
+                else
+                    std::cerr << "Failed to load sound: " << filename << std::endl;
+            }
+        }
+    }
 }

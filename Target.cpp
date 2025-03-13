@@ -11,7 +11,7 @@ Target::Target(String name, int textureIndex) : AGameObject(name)
 void Target::initialize()
 {
     // Initialize the sprite with texture
-    sf::Texture* texture = TextureManager::getInstance()->getFromTextureMap("Rappa", this->textureIndex);
+    sf::Texture* texture = TextureManager::getInstance()->getFromTextureMap("Sparkle", this->textureIndex);
     if (texture) {
         this->sprite = new sf::Sprite();
         this->sprite->setTexture(*texture);

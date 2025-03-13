@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-#include  "GameObjectManager.h"
+#include "GameObjectManager.h"
+#include "GameplayManager.h"
 #include "BGObject.h"
 #include "TextureManager.h"
 #include "TextureDisplay.h"
@@ -13,6 +14,7 @@
 #include "Scoreboard.h"
 #include "Target.h"
 #include "ClickEntity.h"
+#include "SearchDisplay.h"
 
 const float FRAME_RATE = 60.0f;
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.0f / FRAME_RATE);
@@ -27,7 +29,9 @@ BaseRunner::BaseRunner() :
 	//load initial textures
 	TextureManager::getInstance()->loadFromAssetList();
 	SoundManager::getInstance()->loadMusic("HanuTheme.mp3");
-	SoundManager::getInstance()->setMusicVolume(30);
+	SoundManager::getInstance()->loadfromAudioList();
+	SoundManager::getInstance()->setMusicVolume(15);
+	SoundManager::getInstance()->setSoundVolume(30);
 	SoundManager::getInstance()->playMusic(true);
 
 	//load objects
@@ -49,8 +53,15 @@ BaseRunner::BaseRunner() :
 	Target* target = new Target("target", 0);
 	GameObjectManager::getInstance()->addObject(target);
 
-	ClickEntity* item = new ClickEntity("martch", "Jingliu");
-	GameObjectManager::getInstance()->addObject(item);
+	SearchDisplay* searchDisplay = new SearchDisplay("SearchDisplay");
+	GameObjectManager::getInstance()->addObject(searchDisplay);
+
+	/*ClickEntity* item = new ClickEntity("martch", "Sparkle");
+	GameObjectManager::getInstance()->addObject(item);*/
+
+	GameplayManager::getInstance()->initialize();
+	searchDisplay->arrangeGrid(10, 10.0f);
+	//searchDisplay->scatterRandom(50.0f);
 }
 
 void BaseRunner::run() {
