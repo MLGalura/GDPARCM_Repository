@@ -137,6 +137,7 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="BaseRunner.cpp" />
     <ClCompile Include="BGObject.cpp" />
+    <ClCompile Include="ClickEntity.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameplayManager.cpp" />
@@ -160,6 +161,7 @@ sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="BaseRunner.h" />
     <ClInclude Include="BGObject.h" />
+    <ClInclude Include="ClickEntity.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameplayManager.h" />

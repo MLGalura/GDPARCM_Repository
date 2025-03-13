@@ -9,9 +9,12 @@ public:
 	void processInput(sf::Event event);
 	void update(sf::Time deltaTime);
 
+	AGameObject::String getTarget();
 	void setTarget(AGameObject::String name);
 
 private:
+	std::string targetName;
+
 	int textureIndex = 0;
 	sf::IntRect frameRect;
 	int frameWidth = 0;

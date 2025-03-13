@@ -12,6 +12,7 @@
 
 #include "Scoreboard.h"
 #include "Target.h"
+#include "ClickEntity.h"
 
 const float FRAME_RATE = 60.0f;
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.0f / FRAME_RATE);
@@ -42,11 +43,14 @@ BaseRunner::BaseRunner() :
 	LoadPercentage* loadPercentage = new LoadPercentage();
 	GameObjectManager::getInstance()->addObject(loadPercentage);
 
-	Scoreboard* scoreboard = new Scoreboard("scoreboard", 0);
+	Scoreboard* scoreboard = new Scoreboard("scoreboard");
 	GameObjectManager::getInstance()->addObject(scoreboard);
 	
 	Target* target = new Target("target", 0);
 	GameObjectManager::getInstance()->addObject(target);
+
+	ClickEntity* item = new ClickEntity("martch", "Jingliu");
+	GameObjectManager::getInstance()->addObject(item);
 }
 
 void BaseRunner::run() {

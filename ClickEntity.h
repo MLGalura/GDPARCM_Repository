@@ -1,28 +1,22 @@
 #pragma once
 #include "AGameObject.h"
 
-class Scoreboard : public AGameObject
+class ClickEntity : public AGameObject
 {
 public:
-	Scoreboard(String name);
+	ClickEntity(String name, String initial);
 	void initialize();
 	void processInput(sf::Event event);
 	void update(sf::Time deltaTime);
-	void draw(sf::RenderWindow* targetWindow) override;
 
-	void setScore(int value);
-	void setTarget();
+	void setTarget(std::string name);
 
 private:
+	std::string targetName;
+
 	int textureIndex = 0;
 	sf::IntRect frameRect;
 	int frameWidth = 0;
 	int frameHeight = 0;
-
-	int score = 0;
-
-	sf::Text* topText;
-	sf::Text* scoreText;
-	sf::Font* font;
 };
 

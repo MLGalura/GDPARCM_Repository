@@ -74,6 +74,7 @@
     <ClCompile Include="Target.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="ClickEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
@@ -135,5 +136,6 @@
     <ClInclude Include="Target.h">
       <Filter>Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="ClickEntity.h" />
   </ItemGroup>
 </Project>

@@ -3,9 +3,8 @@
 #include "BaseRunner.h"
 #include "TextureManager.h"
 
-Scoreboard::Scoreboard(String name, int textureIndex) : AGameObject(name)
+Scoreboard::Scoreboard(String name) : AGameObject(name)
 {
-	this->textureIndex = textureIndex;
 }
 
 void Scoreboard::initialize()
