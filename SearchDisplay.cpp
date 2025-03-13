@@ -6,7 +6,7 @@
 
 SearchDisplay::SearchDisplay(std::string name) : AGameObject(name) {
     // Initialize with sample targets or load from config
-    targetNames = { "Topaz", "Sparkle", "Jingliu", "Aventurine", "Blade", "JingYuan", "Kafka", "March7th", "Rappa", "RuanMei"};
+    this->targetNames = { "Topaz", "Sparkle", "Jingliu", "Aventurine", "Blade", "JingYuan", "Kafka", "March7th", "Rappa", "RuanMei"};
 }
 
 SearchDisplay::~SearchDisplay() {
@@ -25,9 +25,11 @@ void SearchDisplay::initialize() {
 void SearchDisplay::arrangeGrid(int columns, float padding) {
     reset();
 
+    this->currentTarget = GameplayManager::getInstance()->getTarget();
+
     int rows = this->entityCount / columns + 1;
     float startX = (BaseRunner::WINDOW_WIDTH - (columns * (objectWidth + padding))) / 2;
-    float startY = 100.0f; // Top margin
+    float startY = 100.0f; 
 
     std::random_device seeder;
     std::mt19937 engine(seeder());
@@ -37,7 +39,7 @@ void SearchDisplay::arrangeGrid(int columns, float padding) {
         int randomIndex = dist(engine);
 
         if (this->targetSpawned == true) {
-            while (GameplayManager::getInstance()->getTarget() == targetNames[randomIndex]) {
+            while (this->currentTarget == targetNames[randomIndex]) {
                 randomIndex = dist(engine);
             }
         }
@@ -80,6 +82,27 @@ void SearchDisplay::reset() {
         GameObjectManager::getInstance()->deleteObject(entity);
     }
     clickEntities.clear();
+    this->targetSpawned = false;
+}
+
+void SearchDisplay::resetExceptTarget()
+{
+    std::vector<ClickEntity*> remainingEntities;
+
+    for (auto entity : clickEntities) {
+        if (entity->getTarget() == currentTarget) 
+            remainingEntities.push_back(entity);
+        
+        else 
+            GameObjectManager::getInstance()->deleteObject(entity);
+    }
+
+    clickEntities = remainingEntities;
+}
+
+void SearchDisplay::setEntityCount(int value)
+{
+    this->entityCount = value;
 }
 
 bool SearchDisplay::isOverlapping(sf::FloatRect newRect, sf::FloatRect existingRect) {

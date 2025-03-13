@@ -18,6 +18,9 @@ public:
     void arrangeGrid(int columns, float padding);
     void scatterRandom(int areaPadding);
     void reset();
+    void resetExceptTarget();
+
+    void setEntityCount(int value);
 
 private:
     std::vector<ClickEntity*> clickEntities;

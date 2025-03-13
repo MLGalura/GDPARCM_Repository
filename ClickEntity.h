@@ -10,6 +10,7 @@ public:
 	void update(sf::Time deltaTime);
 
 	void setTarget(std::string name);
+	std::string getTarget();
 	sf::Sprite* getSprite();
 
 private:
@@ -19,5 +20,9 @@ private:
 	sf::IntRect frameRect;
 	int frameWidth = 0;
 	int frameHeight = 0;
+
+	bool isFlashing = false;
+	float flashTimer = 0.0f;
+	float sineWaveTime = 0.0f;
 };
 

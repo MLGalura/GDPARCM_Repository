@@ -3,6 +3,9 @@
 #include "Target.h"
 #include "ClickEntity.h"
 #include "Scoreboard.h"
+#include "SearchDisplay.h"
+
+enum GameMode { GRID, SCATTER };
 
 class GameplayManager
 {
@@ -14,15 +17,22 @@ public:
 
     void setScore(int value);
     int getScore();
+
     void setTarget(std::string name);
+    void setRandomTarget();
     std::string getTarget();
 
+    void startRound();
+    void winRound();
+
 private:
+    std::vector<std::string> targetNames;
     int curScore;
     std::string curTarget;
 
     Scoreboard* scoreboard;
     Target* target;
+    SearchDisplay* sd;
 
     GameplayManager();
     GameplayManager(GameplayManager const&) {};             // copy constructor is private

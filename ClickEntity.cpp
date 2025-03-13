@@ -36,13 +36,17 @@ void ClickEntity::processInput(sf::Event event)
     {
         if (this->sprite && this->sprite->getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
             if (GameplayManager::getInstance()->getTarget() == this->targetName) {
-                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() + 10);
                 SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Success");
+                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() + 10);
+                GameplayManager::getInstance()->winRound();
+
+                this->isFlashing = true;
             }
 
             else {
-                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() - 5);
                 SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Fail");
+                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() - 5);
+                this->isFlashing = true;
             }
         }
     }
@@ -50,6 +54,27 @@ void ClickEntity::processInput(sf::Event event)
 
 void ClickEntity::update(sf::Time deltaTime)
 {
+    if (this->isFlashing) {
+        this->flashTimer += deltaTime.asSeconds();
+        this->sineWaveTime += deltaTime.asSeconds() * 15.0f;
+
+        if (this->flashTimer >= 2.0f) {
+            this->isFlashing = false;
+            this->flashTimer = 0.0f;
+            this->sineWaveTime = 0.0f;
+
+            sf::Color color = this->sprite->getColor();
+            color.a = 255;
+            this->sprite->setColor(color);
+        }
+        else {
+            // sine wave
+            float opacity = (sin(this->sineWaveTime) + 1.0f) / 2.0f;
+            sf::Color color = this->sprite->getColor();
+            color.a = static_cast<sf::Uint8>(opacity * 255);
+            this->sprite->setColor(color);
+        }
+    }
 }
 
 void ClickEntity::setTarget(std::string name)
@@ -58,6 +83,11 @@ void ClickEntity::setTarget(std::string name)
     this->sprite->setTexture(*texture);
 
     this->targetName = name;
+}
+
+std::string ClickEntity::getTarget()
+{
+    return this->targetName;
 }
 
 sf::Sprite* ClickEntity::getSprite()

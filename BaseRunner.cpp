@@ -60,7 +60,8 @@ BaseRunner::BaseRunner() :
 	GameObjectManager::getInstance()->addObject(item);*/
 
 	GameplayManager::getInstance()->initialize();
-	searchDisplay->arrangeGrid(10, 10.0f);
+	GameplayManager::getInstance()->startRound();
+	//searchDisplay->arrangeGrid(10, 10.0f);
 	//searchDisplay->scatterRandom(50.0f);
 }
 
