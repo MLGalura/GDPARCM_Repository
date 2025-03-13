@@ -24,7 +24,7 @@ TextureManager* TextureManager::getInstance() {
 TextureManager::TextureManager()
 {
 	this->countStreamingAssets();
-	this->threadPool = new ThreadPool("TextureManagerPool", 8);
+	this->threadPool = new ThreadPool("TextureManagerPool", 4);
 	this->threadPool->startScheduler();
 }
 

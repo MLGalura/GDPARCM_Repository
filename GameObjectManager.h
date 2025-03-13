@@ -17,13 +17,17 @@ class GameObjectManager
 		static GameObjectManager* getInstance();
 		AGameObject* findObjectByName(AGameObject::String name);
 		List getAllObjects();
+		List getAllFinalObjects();
 		int activeObjects();
 		void processInput(sf::Event event);
 		void update(sf::Time deltaTime);
 		void draw(sf::RenderWindow* window);
 		void addObject(AGameObject* gameObject);
+		void addFinalObject(AGameObject* gameObject);
 		void deleteObject(AGameObject* gameObject);
 		void deleteObjectByName(AGameObject::String name);
+
+		void DoShowFinalAssets();
 
 	private:
 		GameObjectManager() {};
@@ -33,5 +37,10 @@ class GameObjectManager
 
 		HashTable gameObjectMap;
 		List gameObjectList;
+
+		bool showFinalAssets = false;
+
+		List loadingAssetsList;
+		List finalAssetsList;
 };
 

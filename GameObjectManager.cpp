@@ -29,6 +29,11 @@ List GameObjectManager::getAllObjects()
 	return this->gameObjectList;
 }
 
+List GameObjectManager::getAllFinalObjects()
+{
+	return this->finalAssetsList;
+}
+
 int GameObjectManager::activeObjects()
 {
 	return this->gameObjectList.size();
@@ -46,12 +51,24 @@ void GameObjectManager::update(sf::Time deltaTime)
 	for (int i = 0; i < this->gameObjectList.size(); i++) {
 		this->gameObjectList[i]->update(deltaTime);
 	}
+
+	if (this->showFinalAssets) {
+		for (int i = 0; i < this->finalAssetsList.size(); i++) {
+			this->finalAssetsList[i]->update(deltaTime);
+		}
+	}
 }
 
 //draws the object if it contains a sprite
 void GameObjectManager::draw(sf::RenderWindow* window) {
 	for (int i = 0; i < this->gameObjectList.size(); i++) {
 		this->gameObjectList[i]->draw(window);
+	}
+
+	if (this->showFinalAssets) {
+		for (int i = 0; i < this->finalAssetsList.size(); i++) {
+			this->finalAssetsList[i]->draw(window);
+		}
 	}
 }
 
@@ -60,6 +77,13 @@ void GameObjectManager::addObject(AGameObject* gameObject)
 	//also initialize the oject
 	this->gameObjectMap[gameObject->getName()] = gameObject;
 	this->gameObjectList.push_back(gameObject);
+	this->gameObjectMap[gameObject->getName()]->initialize();
+}
+
+void GameObjectManager::addFinalObject(AGameObject* gameObject)
+{
+	this->gameObjectMap[gameObject->getName()] = gameObject;
+	this->finalAssetsList.push_back(gameObject);
 	this->gameObjectMap[gameObject->getName()]->initialize();
 }
 
@@ -89,4 +113,9 @@ void GameObjectManager::deleteObjectByName(AGameObject::String name) {
 	if (object != NULL) {
 		this->deleteObject(object);
 	}
+}
+
+void GameObjectManager::DoShowFinalAssets()
+{
+	this->showFinalAssets = !this->showFinalAssets;
 }

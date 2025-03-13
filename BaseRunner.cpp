@@ -8,6 +8,7 @@
 #include "TextureDisplay.h"
 #include "SoundManager.h"
 #include "FPSCounter.h"
+#include "LoadPercentage.h"
 
 const float FRAME_RATE = 60.0f;
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.0f / FRAME_RATE);
@@ -34,6 +35,9 @@ BaseRunner::BaseRunner() :
 
 	FPSCounter* fpsCounter = new FPSCounter();
 	GameObjectManager::getInstance()->addObject(fpsCounter);
+
+	LoadPercentage* loadPercentage = new LoadPercentage();
+	GameObjectManager::getInstance()->addObject(loadPercentage);
 }
 
 void BaseRunner::run() {
@@ -71,6 +75,12 @@ void BaseRunner::processEvents()
 	sf::Event event;
 	if (this->window.pollEvent(event)) {
 		switch (event.type) {
+
+		case sf::Event::KeyPressed:
+			if (event.key.code == sf::Keyboard::Space) {
+				GameObjectManager::getInstance()->DoShowFinalAssets();
+			}
+			break;
 		
 		default: GameObjectManager::getInstance()->processInput(event); break;
 		case sf::Event::Closed:
