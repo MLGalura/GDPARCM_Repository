@@ -20,4 +20,7 @@ private:
     const std::string SPECIAL_PATH = "Media/40MB/";
 
     void updatePercentage();
+
+    bool isComplete = false; 
+    float sineWaveTime = 0.0f;
 };
