@@ -64,9 +64,27 @@ void SearchDisplay::arrangeGrid(int columns, float padding) {
 
 void SearchDisplay::scatterRandom(int areaPadding) {
     reset();
+    this->currentTarget = GameplayManager::getInstance()->getTarget();
+    bool targetSpawned = false;
+
+    std::random_device seeder;
+    std::mt19937 engine(seeder());
+    std::uniform_int_distribution<int> dist(0, targetNames.size() - 1);
 
     for (int i = 0; i < this->entityCount; i++) {
-        ClickEntity* entity = new ClickEntity("SearchEntity_" + std::to_string(i), targetNames[i]);
+        int randomIndex = dist(engine);
+
+        if (this->targetSpawned == true) {
+            while (this->currentTarget == targetNames[randomIndex]) {
+                randomIndex = dist(engine);
+            }
+        }
+
+        ClickEntity* entity = new ClickEntity("SearchEntity_" + std::to_string(i), targetNames[randomIndex]);
+
+        if (GameplayManager::getInstance()->getTarget() == targetNames[randomIndex])
+            this->targetSpawned = true;
+
         entity->initialize();
 
         sf::Vector2f position = getRandomNonOverlappingPosition(areaPadding);

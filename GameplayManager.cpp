@@ -27,6 +27,14 @@ void GameplayManager::initialize()
 
 void GameplayManager::update(sf::Time elapsedTime)
 {
+    if (isWaitingForRound) {
+        roundWaitTimer += elapsedTime.asSeconds();
+
+        if (roundWaitTimer >= 2.0f) {
+            isWaitingForRound = false;
+            startRound();
+        }
+    }
 }
 
 void GameplayManager::setScore(int value)
@@ -64,17 +72,57 @@ void GameplayManager::startRound()
 {
     this->setRandomTarget();
 
-    // We probably want a randomizer for which the game modes would be, and a randomizer for the params too, and the entity count
-    this->sd->setEntityCount(50);
-    this->sd->arrangeGrid(10, 10.0f);
-    //this->sd->scatterRandom(50.0f);
+    // Randomize game mode
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> modeDist(0, 1);
+    currentMode = static_cast<GameMode>(modeDist(gen));
+
+    // Randomize entity count (15-30)
+    std::uniform_int_distribution<> countDist(15, 75);
+    int entityCount = countDist(gen);
+
+    this->sd->setEntityCount(entityCount);
+
+    if(this->currentMode == GRID) 
+        this->setupGridMode();
+
+    else 
+        this->setupScatterMode();
+
 }
 
 void GameplayManager::winRound()
 {
+    this->isWaitingForRound = true;
+    this->roundWaitTimer = 0.0f;
     this->sd->resetExceptTarget();
+}
 
-    // Wait for 2 seconds
+void GameplayManager::setupGridMode()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
 
-    this->startRound();
+    // Random columns x, y respectively
+    std::uniform_int_distribution<> colDist(5, 10);
+    int columns = colDist(gen);
+
+    // Random padding x, y respectively
+    std::uniform_real_distribution<float> padDist(20.0f, 50.0f);
+    float padding = padDist(gen);
+
+    this->sd->arrangeGrid(columns, padding);
+}
+
+void GameplayManager::setupScatterMode()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // Random padding x, y respectively
+    std::uniform_real_distribution<float> padDist(50.0f, 100.0f);
+    float padding = padDist(gen);
+
+    this->sd->scatterRandom(padding);
 }

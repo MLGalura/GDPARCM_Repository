@@ -124,6 +124,7 @@ void BaseRunner::processEvents()
 
 void BaseRunner::update(sf::Time elapsedTime) {
 	GameObjectManager::getInstance()->update(elapsedTime);
+	GameplayManager::getInstance()->update(elapsedTime);
 }
 
 void BaseRunner::render() {

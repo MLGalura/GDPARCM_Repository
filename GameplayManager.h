@@ -25,7 +25,14 @@ public:
     void startRound();
     void winRound();
 
+    void setupGridMode();
+    void setupScatterMode();
+
 private:
+    GameMode currentMode;
+    bool isWaitingForRound = false;
+    float roundWaitTimer = 0.0f;
+
     std::vector<std::string> targetNames;
     int curScore;
     std::string curTarget;
