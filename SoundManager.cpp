@@ -93,3 +93,22 @@ void SoundManager::loadfromAudioList()
         }
     }
 }
+
+void SoundManager::transitionSong(std::string newSong)
+{
+    const float fadeStep = 0.01f;
+
+    while (musicVolume > 0.0f) {
+        musicVolume = std::max(0.0f, musicVolume - fadeStep);
+        backgroundMusic.setVolume(musicVolume);
+    }
+
+    if (loadMusic(newSong)) {
+
+        playMusic(true);   
+        while (musicVolume < 30.0f) {
+            musicVolume = std::min(30.0f, musicVolume + fadeStep);
+            backgroundMusic.setVolume(musicVolume);
+        }
+    }
+}

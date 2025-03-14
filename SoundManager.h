@@ -24,6 +24,7 @@ public:
     void setMusicVolume(float volume);
 
     void loadfromAudioList();
+    void transitionSong(std::string newSong);
 
 private:
     SoundManager();

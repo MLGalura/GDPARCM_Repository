@@ -113,6 +113,8 @@ void BaseRunner::processEvents()
 
 						GameObjectManager::getInstance()->DoShowFinalAssets();
 						GameObjectManager::getInstance()->deleteObjectByName("LoadPercentage");
+
+						SoundManager::getInstance()->transitionSong("RobinSong.mp3");
 					}
 				}
 			}

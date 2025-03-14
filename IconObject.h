@@ -17,5 +17,6 @@ private:
 	int frameHeight = 0;
 
 	float timer = 0.0f;
+	
 };
 

@@ -38,18 +38,18 @@ void ClickEntity::processInput(sf::Event event)
         if (this->sprite && this->sprite->getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
             if (!isFlashing) {
                 if (GameplayManager::getInstance()->getTarget() == this->targetName) {
-                    SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Success");
-                    GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() + 10);
-                    GameplayManager::getInstance()->winRound();
+                SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Success");
+                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() + 10);
+                GameplayManager::getInstance()->winRound();
 
-                    this->isFlashing = true;
-                }
+                this->isFlashing = true;
+            }
 
-                else {
-                    SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Fail");
-                    GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() - 5);
-                    this->isFlashing = true;
-                }
+            else {
+                SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Fail");
+                GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() - 5);
+                this->isFlashing = true;
+            }
             }
         }
     }
