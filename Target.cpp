@@ -37,6 +37,14 @@ void Target::processInput(sf::Event event)
 
 void Target::update(sf::Time deltaTime)
 {
+    if (this->end) {
+        this->posY -= 2.0f;
+    }
+}
+
+void Target::callEnd()
+{
+    this->end = true;
 }
 
 AGameObject::String Target::getTarget()

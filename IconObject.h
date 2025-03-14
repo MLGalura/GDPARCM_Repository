@@ -15,5 +15,7 @@ private:
 	int currentFrame = 0;
 	int frameWidth = 0;
 	int frameHeight = 0;
+
+	float timer = 0.0f;
 };
 

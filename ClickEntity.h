@@ -15,6 +15,8 @@ public:
 	std::string getTarget();
 	sf::Sprite* getSprite();
 
+	void callEnd();
+
 private:
 	std::string targetName;
 
@@ -24,6 +26,7 @@ private:
 	int frameHeight = 0;
 
 	bool isFlashing = false;
+	bool end = false;
 	float flashTimer = 0.0f;
 	float sineWaveTime = 0.0f;
 };

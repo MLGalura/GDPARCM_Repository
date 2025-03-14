@@ -11,15 +11,26 @@ void BGObject::initialize()
 {
 	std::cout << "Declared as " << this->getName() << "\n";
 
-	//assign texture
-	this->sprite = new sf::Sprite();
-	sf::Texture* texture = TextureManager::getInstance()->getFromTextureMap("WantedPoster", 0);
-	texture->setRepeated(true);
-	this->sprite->setTexture(*texture);
-	sf::Vector2u textureSize = this->sprite->getTexture()->getSize();
-	//make BG height x k to emulate repeating BG.
-	this->sprite->setTextureRect(sf::IntRect(0,0,BaseRunner::WINDOW_WIDTH, BaseRunner::WINDOW_HEIGHT * 8)); 
-	this->setPosition(0, -BaseRunner::WINDOW_HEIGHT * 7);
+	sf::Texture* texture = TextureManager::getInstance()->getFromTextureMap("Penacony", 0);
+	if (texture) {
+		this->sprite = new sf::Sprite();
+		this->sprite->setTexture(*texture);
+
+		// Set frame size
+		this->frameWidth = texture->getSize().x;
+		this->frameHeight = texture->getSize().y;
+		this->frameRect = sf::IntRect(0, 0, this->frameWidth, this->frameHeight);
+		this->sprite->setTextureRect(this->frameRect);
+
+		this->scaleX = 0.3f;
+		this->scaleY = 0.3f;
+
+	}
+
+	// start transparent
+	sf::Color color = this->sprite->getColor();
+	color.a = 0;
+	this->sprite->setColor(color);
 }
 
 void BGObject::processInput(sf::Event event)
@@ -28,6 +39,17 @@ void BGObject::processInput(sf::Event event)
 
 void BGObject::update(sf::Time deltaTime)
 {
+	if (this->show) {
+		this->timer += deltaTime.asSeconds();
+
+		if (this->timer > 2.0f) {
+			float opacity = this->sprite->getColor().a / 255.0f;
+			opacity = std::min(1.0f, opacity + 0.01f);
+			sf::Color color = this->sprite->getColor();
+			color.a = static_cast<sf::Uint8>(opacity * 255);
+			this->sprite->setColor(color);
+		}
+	}
 	//make BG scroll slowly
 	//sf::Vector2f position = this->getPosition();
 	//position.y += this->SPEED_MULTIPLIER * deltaTime.asSeconds();
@@ -41,4 +63,9 @@ void BGObject::update(sf::Time deltaTime)
 	//else {
 	//	
 	//}
+}
+
+void BGObject::showBG()
+{
+	this->show = true;
 }

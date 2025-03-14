@@ -35,8 +35,8 @@ BaseRunner::BaseRunner() :
 	SoundManager::getInstance()->playMusic(true);
 
 	//load objects
-	//BGObject* bgObject = new BGObject("BGObject");
-	//GameObjectManager::getInstance()->addObject(bgObject);
+	BGObject* bgObject = new BGObject("BGObject");
+	GameObjectManager::getInstance()->addObject(bgObject);
 
 	TextureDisplay* display = new TextureDisplay();
 	GameObjectManager::getInstance()->addObject(display);
@@ -103,14 +103,20 @@ void BaseRunner::processEvents()
 
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::Space) {
-				GameObjectManager::getInstance()->DoShowFinalAssets();
-				GameObjectManager::getInstance()->deleteObjectByName("LoadPercentage");
+				LoadPercentage* lp = dynamic_cast<LoadPercentage*>(GameObjectManager::getInstance()->findObjectByName("LoadPercentage"));
+
+				if (lp) {
+					if (lp->IsComplete()) {
+						GameplayManager::getInstance()->endGame();
+						BGObject* bgObject = dynamic_cast<BGObject*>(GameObjectManager::getInstance()->findObjectByName("BGObject"));
+						bgObject->showBG();
+
+						GameObjectManager::getInstance()->DoShowFinalAssets();
+						GameObjectManager::getInstance()->deleteObjectByName("LoadPercentage");
+					}
+				}
 			}
 
-			if (event.key.code == sf::Keyboard::A) {
-				Target* targetobj = dynamic_cast<Target*>(GameObjectManager::getInstance()->findObjectByName("target"));
-				targetobj->setTarget("Topaz");
-			}
 			break;
 		
 		default: GameObjectManager::getInstance()->processInput(event); break;

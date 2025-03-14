@@ -10,6 +10,8 @@ public:
 	void update(sf::Time deltaTime);
 	void draw(sf::RenderWindow* targetWindow) override;
 
+	void callEnd();
+
 	void setScore(int value);
 	void setTarget();
 
@@ -20,6 +22,7 @@ private:
 	int frameHeight = 0;
 
 	int score = 0;
+	bool end = false;
 
 	sf::Text* topText;
 	sf::Text* scoreText;

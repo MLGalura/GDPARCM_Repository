@@ -24,6 +24,7 @@ public:
 
     void startRound();
     void winRound();
+    void endGame();
 
     void setupGridMode();
     void setupScatterMode();

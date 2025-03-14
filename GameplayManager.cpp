@@ -86,7 +86,6 @@ void GameplayManager::startRound()
     std::uniform_int_distribution<> modeDist(0, 1);
     currentMode = static_cast<GameMode>(modeDist(gen));
 
-    this->currentMode = SCATTER;
     if (this->currentMode == GRID) {
         std::uniform_int_distribution<> countDist(15, 45);
         int entityCount = countDist(gen);
@@ -106,6 +105,13 @@ void GameplayManager::winRound()
     this->isWaitingForRound = true;
     this->roundWaitTimer = 0.0f;
     this->sd->resetExceptTarget();
+}
+
+void GameplayManager::endGame()
+{
+    this->sd->end();
+    this->scoreboard->callEnd();
+    this->target->callEnd();
 }
 
 void GameplayManager::setupGridMode()

@@ -20,6 +20,7 @@ public:
     void shuffleEntities();
     void reset();
     void resetExceptTarget();
+    void end();
 
     void setEntityCount(int value);
 
@@ -35,5 +36,5 @@ private:
 
     std::vector<std::string> generateEntityList();
     bool isOverlapping(sf::FloatRect newRect, sf::FloatRect existingRect);
-    sf::Vector2f getRandomNonOverlappingPosition(float padding);
+    sf::Vector2f getRandomNonOverlappingPosition(float padding, float minY, float maxY);
 };

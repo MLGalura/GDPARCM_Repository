@@ -21,6 +21,11 @@ void IconObject::initialize() {
         this->frameHeight = texture->getSize().y / 5; 
         this->frameRect = sf::IntRect(0, 0, this->frameWidth, this->frameHeight);
         this->sprite->setTextureRect(this->frameRect);
+
+        // start transparent
+        sf::Color color = this->sprite->getColor();
+        color.a = 0;
+        this->sprite->setColor(color);
     }
 }
 
@@ -28,7 +33,18 @@ void IconObject::processInput(sf::Event event) {
 }
 
 void IconObject::update(sf::Time deltaTime) {
-    // Handle animation
+
+    this->timer += deltaTime.asSeconds();
+
+    if (this->timer > 2.0f) {
+        float opacity = this->sprite->getColor().a / 255.0f;
+        opacity = std::min(1.0f, opacity + 0.01f);
+        sf::Color color = this->sprite->getColor();
+        color.a = static_cast<sf::Uint8>(opacity * 255);
+        this->sprite->setColor(color);
+    }
+    
+    // handle animation
     float animationSpeed = 0.1f;
     this->elapsedTime += deltaTime.asSeconds();
 

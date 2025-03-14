@@ -79,6 +79,10 @@ void SearchDisplay::scatterRandom(int areaPadding) {
     this->currentTarget = GameplayManager::getInstance()->getTarget();
     bool targetSpawned = false;
 
+    // Calculate vertical bounds
+    const float MIN_Y = 150.0f;
+    const float MAX_Y = BaseRunner::WINDOW_HEIGHT - 100.0f - objectHeight;
+
     std::random_device seeder;
     std::mt19937 engine(seeder());
     std::uniform_int_distribution<int> dist(0, targetNames.size() - 1);
@@ -104,9 +108,9 @@ void SearchDisplay::scatterRandom(int areaPadding) {
 
         entity->initialize();
 
-        sf::Vector2f position = getRandomNonOverlappingPosition(areaPadding);
-        entity->setPosition(position.x, position.y);
-
+        sf::Vector2f position = getRandomNonOverlappingPosition(areaPadding, MIN_Y, MAX_Y);
+        entity->setPosition(position.x, position.y); 
+         
         clickEntities.push_back(entity);
         GameObjectManager::getInstance()->addObject(entity);
     }
@@ -142,6 +146,13 @@ void SearchDisplay::resetExceptTarget()
     clickEntities = remainingEntities;
 }
 
+void SearchDisplay::end()
+{
+    for (auto entity : clickEntities) {
+        entity->callEnd();
+    }
+}
+
 void SearchDisplay::setEntityCount(int value)
 {
     this->entityCount = value;
@@ -151,24 +162,26 @@ bool SearchDisplay::isOverlapping(sf::FloatRect newRect, sf::FloatRect existingR
     return newRect.intersects(existingRect);
 }
 
-sf::Vector2f SearchDisplay::getRandomNonOverlappingPosition(float padding) {
+sf::Vector2f SearchDisplay::getRandomNonOverlappingPosition(float padding, float minY, float maxY) {
     std::random_device rd;
     std::mt19937 gen(rd());
+
     std::uniform_real_distribution<float> distX(padding, BaseRunner::WINDOW_WIDTH - objectWidth - padding);
-    std::uniform_real_distribution<float> distY(padding, BaseRunner::WINDOW_HEIGHT - objectHeight - padding);
+    std::uniform_real_distribution<float> distY(minY, maxY);
 
     sf::Vector2f position;
     bool validPosition = false;
     int attempts = 0;
 
-    while (!validPosition && attempts < 100) {
-        position = { distX(gen), distY(gen) };
-        sf::FloatRect newBounds(position.x, position.y, objectWidth, objectHeight);
+    // Currently not working
+    while (!validPosition && attempts < 100) { 
+        position = { distX(gen), distY(gen) }; 
+        sf::FloatRect newBounds(position.x, position.y, objectWidth, objectHeight); 
 
         validPosition = true;
-        for (auto entity : clickEntities) {
-            sf::FloatRect existingBounds = entity->getSprite()->getGlobalBounds();
-            if (isOverlapping(newBounds, existingBounds)) {
+        for (auto entity : clickEntities) { 
+            sf::FloatRect existingBounds = entity->getSprite()->getGlobalBounds(); 
+            if (isOverlapping(newBounds, existingBounds)) { 
                 validPosition = false;
                 break;
             }

@@ -7,7 +7,16 @@ class BGObject : public AGameObject
 		void initialize() override;
 		void processInput(sf::Event event) override;
 		void update(sf::Time deltaTime) override;
+
+		void showBG();
 	private:
 		const float SPEED_MULTIPLIER = 100.0f;
+
+		sf::IntRect frameRect;
+		int frameWidth = 0;
+		int frameHeight = 0;
+
+		bool show = false;
+		float timer = 0;
 };
 

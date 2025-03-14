@@ -59,6 +59,12 @@ void Scoreboard::processInput(sf::Event event)
 
 void Scoreboard::update(sf::Time deltaTime)
 {
+    if (this->end) {
+        this->posY -= 2.0f;
+
+        this->topText->setString("");
+        this->scoreText->setString("");
+    }
 }
 
 void Scoreboard::draw(sf::RenderWindow* targetWindow)
@@ -71,6 +77,11 @@ void Scoreboard::draw(sf::RenderWindow* targetWindow)
         targetWindow->draw(*this->topText);
         targetWindow->draw(*this->scoreText);
     }
+}
+
+void Scoreboard::callEnd()
+{
+    this->end = true;
 }
 
 void Scoreboard::setScore(int value)
