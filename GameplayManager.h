@@ -41,6 +41,8 @@ private:
     Target* target;
     SearchDisplay* sd;
 
+    bool soundFlag = true;
+
     GameplayManager();
     GameplayManager(GameplayManager const&) {};             // copy constructor is private
     GameplayManager& operator=(GameplayManager const&) {};  // assignment operator is private

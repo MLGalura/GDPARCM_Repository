@@ -1,5 +1,6 @@
 #include "GameplayManager.h"
 #include "GameObjectManager.h"
+#include "SoundManager.h"
 #include <iostream>
 
 GameplayManager* GameplayManager::sharedInstance = NULL;
@@ -30,8 +31,15 @@ void GameplayManager::update(sf::Time elapsedTime)
     if (isWaitingForRound) {
         roundWaitTimer += elapsedTime.asSeconds();
 
-        if (roundWaitTimer >= 2.0f) {
+        if (roundWaitTimer >= 1.0f && this->soundFlag) {
+            SoundManager::getInstance()->playSound("Snare");
+            this->soundFlag = false;
+        }
+
+        if (roundWaitTimer >= 2.4f) {
             isWaitingForRound = false;
+            this->soundFlag = true;
+
             startRound();
         }
     }
@@ -78,7 +86,7 @@ void GameplayManager::startRound()
     std::uniform_int_distribution<> modeDist(0, 1);
     currentMode = static_cast<GameMode>(modeDist(gen));
 
-    this->currentMode = GRID;
+    this->currentMode = SCATTER;
     if (this->currentMode == GRID) {
         std::uniform_int_distribution<> countDist(15, 45);
         int entityCount = countDist(gen);
@@ -88,8 +96,8 @@ void GameplayManager::startRound()
         this->setupGridMode();
     }
 
-    //else 
-     //   this->setupScatterMode();
+    else 
+        this->setupScatterMode();
 
 }
 
