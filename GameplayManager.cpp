@@ -24,6 +24,7 @@ void GameplayManager::initialize()
     this->scoreboard = dynamic_cast<Scoreboard*>(GameObjectManager::getInstance()->findObjectByName("scoreboard"));
     this->target = dynamic_cast<Target*>(GameObjectManager::getInstance()->findObjectByName("target"));
     this->sd = dynamic_cast<SearchDisplay*>(GameObjectManager::getInstance()->findObjectByName("SearchDisplay"));
+    this->pointhover = dynamic_cast<PointHover*>(GameObjectManager::getInstance()->findObjectByName("PointHover"));
 }
 
 void GameplayManager::update(sf::Time elapsedTime)
@@ -54,6 +55,13 @@ void GameplayManager::setScore(int value)
 int GameplayManager::getScore()
 {
     return this->curScore;
+}
+
+void GameplayManager::showPointGain(float posX, float posY, std::string points, sf::Color color)
+{
+    this->pointhover->setPosition(posX, posY);
+    this->pointhover->setPoints(points, color);
+    this->pointhover->showPoint();
 }
 
 void GameplayManager::setTarget(std::string name)

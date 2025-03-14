@@ -14,6 +14,7 @@
 #include "Scoreboard.h"
 #include "Target.h"
 #include "ClickEntity.h"
+#include "PointHover.h"
 #include "SearchDisplay.h"
 
 const float FRAME_RATE = 60.0f;
@@ -55,6 +56,9 @@ BaseRunner::BaseRunner() :
 
 	SearchDisplay* searchDisplay = new SearchDisplay("SearchDisplay");
 	GameObjectManager::getInstance()->addObject(searchDisplay);
+
+	PointHover* pointHover = new PointHover();
+	GameObjectManager::getInstance()->addObject(pointHover);
 
 	/*ClickEntity* item = new ClickEntity("martch", "Sparkle");
 	GameObjectManager::getInstance()->addObject(item);*/

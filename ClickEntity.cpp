@@ -40,6 +40,7 @@ void ClickEntity::processInput(sf::Event event)
                 if (GameplayManager::getInstance()->getTarget() == this->targetName) {
                 SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Success");
                 GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() + 10);
+                GameplayManager::getInstance()->showPointGain(this->posX, this->posY, "+10", sf::Color::Green);
                 GameplayManager::getInstance()->winRound();
 
                 this->isFlashing = true;
@@ -47,6 +48,7 @@ void ClickEntity::processInput(sf::Event event)
 
             else {
                 SoundManager::getInstance()->playSound(GameplayManager::getInstance()->getTarget() + "Fail");
+                GameplayManager::getInstance()->showPointGain(this->posX, this->posY, "-5", sf::Color::Red);
                 GameplayManager::getInstance()->setScore(GameplayManager::getInstance()->getScore() - 5);
                 this->isFlashing = true;
             }

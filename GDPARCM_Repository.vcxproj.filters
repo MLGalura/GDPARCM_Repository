@@ -78,6 +78,7 @@
       <Filter>Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="SearchDisplay.cpp" />
+    <ClCompile Include="PointHover.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
@@ -143,5 +144,6 @@
       <Filter>Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="SearchDisplay.h" />
+    <ClInclude Include="PointHover.h" />
   </ItemGroup>
 </Project>

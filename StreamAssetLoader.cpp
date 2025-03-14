@@ -21,7 +21,7 @@ void StreamAssetLoader::onStartTask()
 {
 	std::random_device seeder; 
 	std::mt19937 engine(seeder()); 
-	std::uniform_int_distribution<int> dist(2000, 6000);
+	std::uniform_int_distribution<int> dist(5000, 8000);
 	IETThread::sleep(dist(engine));
 
 	std::vector<String> tokens = StringUtils::split(path, '/');

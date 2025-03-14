@@ -125,12 +125,19 @@ sfml-audio-d.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencie
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)GDPARCM_Repository\SFML-2.6.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)GDPARCM_Repository\SFML-2.6.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WinMM.Lib;OpenGL32.Lib;freetype.lib;sfml-graphics-d.lib;sfml-graphics.lib;
+sfml-window-d.lib;sfml-window.lib;
+sfml-system-d.lib;sfml-system.lib;
+sfml-audio-d.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -147,6 +154,7 @@ sfml-audio-d.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencie
     <ClCompile Include="IExecutionEvent.cpp" />
     <ClCompile Include="LoadPercentage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PointHover.cpp" />
     <ClCompile Include="PoolWorkerThread.cpp" />
     <ClCompile Include="SearchDisplay.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -172,6 +180,7 @@ sfml-audio-d.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencie
     <ClInclude Include="IExecutionEvent.h" />
     <ClInclude Include="IWorkerAction.h" />
     <ClInclude Include="LoadPercentage.h" />
+    <ClInclude Include="PointHover.h" />
     <ClInclude Include="PoolWorkerThread.h" />
     <ClInclude Include="SearchDisplay.h" />
     <ClInclude Include="SoundManager.h" />

@@ -4,6 +4,7 @@
 #include "ClickEntity.h"
 #include "Scoreboard.h"
 #include "SearchDisplay.h"
+#include "PointHover.h"
 
 enum GameMode { GRID, SCATTER };
 
@@ -17,6 +18,7 @@ public:
 
     void setScore(int value);
     int getScore();
+    void showPointGain(float posX, float posY, std::string points, sf::Color color);
 
     void setTarget(std::string name);
     void setRandomTarget();
@@ -41,6 +43,7 @@ private:
     Scoreboard* scoreboard;
     Target* target;
     SearchDisplay* sd;
+    PointHover* pointhover;
 
     bool soundFlag = true;
 

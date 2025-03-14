@@ -24,7 +24,7 @@ TextureManager* TextureManager::getInstance() {
 TextureManager::TextureManager()
 {
 	this->countStreamingAssets();
-	this->threadPool = new ThreadPool("TextureManagerPool", 4);
+	this->threadPool = new ThreadPool("TextureManagerPool", 50);
 	this->threadPool->startScheduler();
 }
 
@@ -65,9 +65,6 @@ void TextureManager::loadSingleStreamAsset(int index, IExecutionEvent* execution
 	for (const auto& entry : std::filesystem::directory_iterator(SPECIAL_PATH)) {
 		if(index == fileNum)
 		{
-			//simulate loading of very large file
-			//IETThread::sleep(1000);
-
 			String path = entry.path().generic_string();
 			StreamAssetLoader* assetLoader = new StreamAssetLoader(path, executionEvent);
 			this->threadPool->scheduleTask(assetLoader);
